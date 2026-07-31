@@ -1,0 +1,152 @@
+:root {
+  --bg-main: #0f172a;
+  --bg-card: #1e293b;
+  --bg-hover: #334155;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --border: #334155;
+  --radius-lg: 16px;
+  --radius-md: 8px;
+  
+  --status-active-bg: rgba(16, 185, 129, 0.15);
+  --status-active-fg: #34d399;
+  --status-inactive-bg: rgba(239, 68, 68, 0.15);
+  --status-inactive-fg: #f87171;
+  --status-pending-bg: rgba(245, 158, 11, 0.15);
+  --status-pending-fg: #fbbf24;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+body { background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; padding: 2rem; display: flex; justify-content: center; }
+
+.app-container { width: 100%; max-width: 1100px; display: flex; flex-direction: column; gap: 1.5rem; }
+.app-header { display: flex; justify-content: space-between; align-items: center; }
+.brand { display: flex; align-items: center; gap: 1rem; }
+
+/* Header Logo Styling */
+.logo-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand-logo { width: 100%; height: 100%; object-fit: contain; }
+
+/* Table Profile Avatar */
+.avatar-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  background-color: var(--bg-main);
+}
+
+.subtitle { color: var(--text-muted); font-size: 0.875rem; }
+.header-actions { display: flex; gap: 0.75rem; }
+
+.btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; border-radius: var(--radius-md); font-size: 0.875rem; cursor: pointer; border: none; text-decoration: none; transition: 0.2s; }
+.btn-primary { background: var(--accent); color: white; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-secondary { background: var(--bg-hover); color: var(--text-main); border: 1px solid var(--border); }
+.btn-secondary:hover { background: #475569; }
+.btn-icon { background: transparent; border: none; color: var(--text-muted); cursor: pointer; padding: 0.4rem; border-radius: 6px; }
+.btn-icon:hover { color: var(--text-main); background: var(--bg-hover); }
+.btn-close { background: none; border: none; color: var(--text-muted); cursor: pointer; }
+
+.controls-bar { display: flex; justify-content: space-between; align-items: center; }
+.search-box { display: flex; align-items: center; gap: 0.5rem; background: var(--bg-card); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: var(--radius-md); width: 320px; }
+.search-box input { background: transparent; border: none; color: var(--text-main); outline: none; width: 100%; }
+.stats-pills { display: flex; gap: 0.75rem; }
+.pill { background: var(--bg-card); border: 1px solid var(--border); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; color: var(--text-muted); }
+
+.table-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.data-table { width: 100%; border-collapse: collapse; text-align: left; }
+.data-table th { background: rgba(15, 23, 42, 0.4); padding: 1rem 1.25rem; font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+.data-table td { padding: 0.8rem 1.25rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; vertical-align: middle; }
+.data-table tbody tr:hover { background: var(--bg-hover); }
+
+.badge { padding: 0.25rem 0.6rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600; display: inline-block; }
+.badge-active { background: var(--status-active-bg); color: var(--status-active-fg); }
+.badge-inactive { background: var(--status-inactive-bg); color: var(--status-inactive-fg); }
+.badge-pending { background: var(--status-pending-bg); color: var(--status-pending-fg); }
+
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 100; }
+.modal-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); width: 100%; max-width: 450px; padding: 1.5rem; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+.form-group label { font-size: 0.8rem; color: var(--text-muted); }
+.form-group input, .form-group select { background: var(--bg-main); border: 1px solid var(--border); padding: 0.6rem; border-radius: var(--radius-md); color: var(--text-main); outline: none; }
+.modal-footer { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem; }
+.empty-state { padding: 3rem; text-align: center; color: var(--text-muted); }
+.hidden { display: none !important; }
+.print-only-header { display: none; }
+
+/* ======================================================
+   PRINT MEDIA RULES (Triggers on Ctrl+P or window.print)
+   ====================================================== */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide UI elements during print */
+  .app-header, 
+  .controls-bar, 
+  .action-col, 
+  .modal-overlay {
+    display: none !important;
+  }
+
+  /* Show dedicated print document header */
+  .print-only-header {
+    display: block !important;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .print-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .print-logo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .table-card {
+    background: #ffffff !important;
+    border: 1px solid #cccccc !important;
+    box-shadow: none !important;
+  }
+
+  .data-table th {
+    background: #f1f5f9 !important;
+    color: #000000 !important;
+    border-bottom: 2px solid #000000 !important;
+  }
+
+  .data-table td {
+    color: #000000 !important;
+    border-bottom: 1px solid #dddddd !important;
+  }
+
+  .badge {
+    border: 1px solid #000000 !important;
+    background: transparent !important;
+    color: #000000 !important;
+  }
+}
